@@ -27,6 +27,8 @@ This clean separation ensures the system is modular, testable, and scalable.
 
 ## ⚙️ Setup Instructions
 
+Before running anything make sure that you have `Docker` tools installed!
+
 ### 1️⃣ Clone the Repository
 
 ```bash
