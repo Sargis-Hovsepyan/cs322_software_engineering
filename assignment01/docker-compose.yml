@@ -13,6 +13,8 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - valhalla-net
 
   nats:
     image: nats:latest
@@ -31,6 +33,26 @@ services:
       - valhalla-net
     depends_on:
       - nats
+
+  nestjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nestjs
+    depends_on:
+      - postgres
+      - nats
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USERNAME=username
+      - DB_PASSWORD=password
+      - DB_DATABASE=valhalla
+      - NATS_URL=nats://nats:4222
+    ports:
+      - "3000:3000"
+    networks:
+      - valhalla-net
 
 volumes:
   postgres_data:
