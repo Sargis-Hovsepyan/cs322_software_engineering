@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { DataSource } from 'typeorm';
-import { Message } from './entities/nuts-message.entity';
+import { Message } from './entities/message.entity';
 
 export const AppDataSource = new DataSource({
   type: 'postgres',

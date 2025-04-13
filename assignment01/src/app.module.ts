@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppDataSource } from './data/data-source';
-import { Message } from './data/entities/nuts-message.entity';
-import { NatsSubscriber } from './api/nats.subscriber';
+import { Message } from './data/entities/message.entity';
+import { MessageController } from './api/message.controller';
 import { MessageService } from './service/message.service';
 import { MessageRepository } from './data/message.repository';
 
@@ -12,6 +12,6 @@ import { MessageRepository } from './data/message.repository';
     TypeOrmModule.forFeature([Message]),
   ],
   providers: [MessageService, MessageRepository],
-  controllers: [NatsSubscriber],
+  controllers: [MessageController],
 })
 export class AppModule {}
