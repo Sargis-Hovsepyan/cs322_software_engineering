@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: valhalla
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  nats:
+    image: nats:latest
+    container_name: nats
+    ports:
+      - "4222:4222"
+    networks:
+      - valhalla-net
+
+  nats-box:
+    image: natsio/nats-box
+    container_name: nats-box
+    stdin_open: true
+    tty: true
+    networks:
+      - valhalla-net
+    depends_on:
+      - nats
+
+volumes:
+  postgres_data:
+
+networks:
+  valhalla-net:
