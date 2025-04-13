@@ -3,7 +3,7 @@ import { MessagePattern } from '@nestjs/microservices';
 import { MessageService } from '../service/message.service';
 
 @Controller()
-export class NatsSubscriber {
+export class MessageController {
   constructor(private readonly messageService: MessageService) {}
 
   @MessagePattern('nats_message_channel')
